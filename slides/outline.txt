@@ -1,0 +1,6 @@
+Brief history of recommender systems
+Colaborative filtering  (high level to in-depth math)
+Cold start challenges
+Sparse data issues
+Wide overview and in-depth
+Deep overview and in-depth
