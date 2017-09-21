@@ -18,11 +18,12 @@ There are 3 jupyter notebooks with focus on:
 
 -   **Matrix Factorization Model**
 
-![](Picture1.png)
+![](https://datasciencemadesimpler.files.wordpress.com/2015/12/mf.png?w=809)
+source:https://datasciencemadesimpler.wordpress.com/tag/matrix-factorization/
 
 -   **Deep and Wide Model**
 
-![](../../Desktop/Screen Shot 2017-09-20 at 16.34.04.png)
+![](https://www.tensorflow.org/images/wide_n_deep.svg)
 
 source:<https://www.tensorflow.org/tutorials/wide_and_deep>
 
