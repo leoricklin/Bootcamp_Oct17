@@ -31,6 +31,8 @@ source:<https://www.tensorflow.org/tutorials/wide_and_deep>
 
 -   **Deep Matrix Factorization Model**
 
+![](https://github.com/ThinkBigAnalytics/Academy-AI/blob/master/lab/DNN%20MF.png)
+
 1.  4 layer neural network, with activation function: relu, relu, relu, softmax.
 
 2.  Input layer is the element wise prodcut of the user embedding and the movie
