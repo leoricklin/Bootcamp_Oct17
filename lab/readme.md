@@ -31,7 +31,7 @@ source:<https://www.tensorflow.org/tutorials/wide_and_deep>
 
 -   **Deep Matrix Factorization Model**
 
-![](https://github.com/ThinkBigAnalytics/Academy-AI/blob/master/lab/DNN.png)
+![](https://github.com/ThinkBigAnalytics/Academy-AI/blob/master/lab/dnn.png)
 
 1.  4 layer neural network, with activation function: relu, relu, relu, softmax.
 
