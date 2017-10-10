@@ -2,7 +2,7 @@
 Five teams were formed:
 
 ![](img/IMG_1281.JPG)
-![](img/IMG_1283.JPG)
+![](img/IMG_1279.JPG)
 ![](img/IMG_1285.JPG)
 ![](img/IMG_1287.JPG)
 ![](img/IMG_1289.JPG)
