@@ -4,7 +4,9 @@ Five teams were formed:
 ![](img/IMG_1281.JPG)
 ![](img/IMG_1279.JPG)
 ![](img/IMG_1285.JPG)
+# The Warriors
 ![](img/IMG_1287.JPG)
+Rohit Belgal, Bowen Zhang, Joseph de Jesus, Hariadi Budaya, Cleveland Sellers
 ![](img/IMG_1289.JPG)
 Team "CDI - Crime Data Investigation"
 Members:
