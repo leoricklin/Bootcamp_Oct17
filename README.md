@@ -9,10 +9,10 @@ Five teams were formed:
 ## Team "CDI - Crime Data Investigation"
 Members:
 * Anand Atre
-* Will Fleudy
+* Will Fleury
 * Luisa Quispe Ortiz 
 * Antonio Roig
 * Leorick Lin
-* Jon Dehdari
+* Jon D.
 
 <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Language Cheat Sheet</a>
