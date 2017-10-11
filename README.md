@@ -5,7 +5,7 @@ Five teams were formed:
 ![](img/IMG_1281.JPG)
 ![](img/IMG_1279.JPG)
 ## Team Hawkeye: 
-![](img/hawkeye.jpg)
+![](img/hawkeye.png)
 (Front row) David Springate, Yasir Abbasi, Awais Rafique (back row) Dean Sives, Asim Israr, Hyung No
 ![](img/IMG_1287.JPG)
 Rohit Belgal, Bowen Zhang, Joseph de Jesus, Hariadi Budaya, Cleveland Sellers
