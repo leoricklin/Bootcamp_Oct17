@@ -6,7 +6,14 @@ Five teams were formed:
 ![](img/hawkeye.png)
 
 (Front row) David Springate, Yasir Abbasi, Awais Rafique (Back row) Dean Sives, Asim Israr, Hyung No
+## Team CloudKnights
 ![](img/IMG_1281.JPG)
+* Seiji Komine
+* Jared Glade
+* David Aviles
+* Pradeep Abraham
+* Balasubramanian Jayaraman
+* Joseph Colletti
 ![](img/IMG_1279.JPG)
 ![](img/IMG_1287.JPG)
 Rohit Belgal, Bowen Zhang, Joseph de Jesus, Hariadi Budaya, Cleveland Sellers
