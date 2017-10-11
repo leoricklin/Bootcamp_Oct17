@@ -15,6 +15,7 @@ Five teams were formed:
 * Balasubramanian Jayaraman
 * Joseph Colletti
 ![](img/IMG_1279.JPG)
+## Team Warriors
 ![](img/IMG_1287.JPG)
 * Rohit Belgal
 * Bowen Zhang
