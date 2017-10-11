@@ -4,7 +4,9 @@ Five teams were formed:
 
 ## Team Hawkeye: 
 ![](img/hawkeye.jpg)
-(Front row) David Springate, Yasir Abbasi, Awais Rafique (back row) Dean Sives, Asim Israr, Hyung No
+(Front row) David Springate, Yasir Abbasi, Awais Rafique 
+(Back row) Dean Sives, Asim Israr, Hyung No
+
 ![](img/IMG_1281.JPG)
 ![](img/IMG_1279.JPG)
 ![](img/IMG_1287.JPG)
