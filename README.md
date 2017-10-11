@@ -14,7 +14,14 @@ Five teams were formed:
 * Pradeep Abraham
 * Balasubramanian Jayaraman
 * Joseph Colletti
+## Team Nortia
 ![](img/IMG_1279.JPG)
+* Valentino Miazzo
+* Tomas Kadlec
+* Mohammad Paracha
+* Christakis Korakidis
+* Feng Zhao
+* Adam Therrell
 ## Team Warriors
 ![](img/IMG_1287.JPG)
 * Rohit Belgal
