@@ -16,7 +16,11 @@ Five teams were formed:
 * Joseph Colletti
 ![](img/IMG_1279.JPG)
 ![](img/IMG_1287.JPG)
-Rohit Belgal, Bowen Zhang, Joseph de Jesus, Hariadi Budaya, Cleveland Sellers
+* Rohit Belgal
+* Bowen Zhang
+* Joseph de Jesus
+* Hariadi Budaya
+* Cleveland Sellers
 ![](img/IMG_1289.JPG)
 ## Team "CDI - Crime Data Investigation"
 Members:
