@@ -7,6 +7,9 @@ library(stringr)
 library(dygraphs)
 library(visNetwork)
 
+#Added packages
+library(DT)
+
 ################################# LOAD MODULES #################################
 
 my_modules <- list.files("tabs", pattern = "tab_module.R", full.names = TRUE,

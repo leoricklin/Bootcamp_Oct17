@@ -8,9 +8,6 @@ sidebar <- dashboardSidebar(
               #menuSubItem("Datasets", tabName = "datasets", icon=icon('filter'))),
     menuItem("Factor Variables",      tabName = "Tab1", icon = icon("certificate")),
     menuItem("Twitter Social Nets",      tabName = "Tab2", icon = icon("globe"))
-    #menuItem("Fun with timeseries",       tabName = "Tab3", icon = icon("line-chart")),
-    #menuItem("Look at phone data",        tabName = "Tab4", icon = icon("mobile-phone")),
-    #menuItem("Networks",                  tabName = "Tab5", icon = icon("link"))
   ),
 
   # Logo in sidebar menu
