@@ -1,12 +1,16 @@
 ############################## CREATE THE SIDEBAR ##############################
 sidebar <- dashboardSidebar(
   sidebarMenu(
-    menuItem("How to use this Dashboard", tabName = "Tab0", icon = icon("info-circle")),
-    menuItem("Learn about ThinkBig",      tabName = "Tab1", icon = icon("certificate")),
-    menuItem("Plot points on a map",      tabName = "Tab2", icon = icon("globe")),
-    menuItem("Fun with timeseries",       tabName = "Tab3", icon = icon("line-chart")),
-    menuItem("Look at phone data",        tabName = "Tab4", icon = icon("mobile-phone")),
-    menuItem("Networks",                  tabName = "Tab5", icon = icon("link"))
+    menuItem("Summary", tabName = "Tab0", icon = icon("info-circle")),
+             #collapsible= 
+              # menuSubItem("Default1", tabName = "not_used1", icon=icon('filter')),
+              #menuSubItem("Executive Summary", tabName = "Tab0_Sum", icon=icon('filter')),
+              #menuSubItem("Datasets", tabName = "datasets", icon=icon('filter'))),
+    menuItem("Factor Variables",      tabName = "Tab1", icon = icon("certificate")),
+    menuItem("Twitter Social Nets",      tabName = "Tab2", icon = icon("globe"))
+    #menuItem("Fun with timeseries",       tabName = "Tab3", icon = icon("line-chart")),
+    #menuItem("Look at phone data",        tabName = "Tab4", icon = icon("mobile-phone")),
+    #menuItem("Networks",                  tabName = "Tab5", icon = icon("link"))
   ),
 
   # Logo in sidebar menu
@@ -36,7 +40,7 @@ body <- dashboardBody(
 
 #################### PUT THEM TOGETHER INTO A DASHBOARDPAGE ####################
 dashboardPage(skin = "yellow",
-  dashboardHeader(title = "My awesome title"),
+  dashboardHeader(title = "PC Labs Demo"),
   sidebar,
   body
 )
