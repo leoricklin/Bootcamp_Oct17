@@ -1,16 +1,12 @@
 # server code for R Shiny Dashboard Engine demo
 shinyServer(function(input, output, session) {
   
-  #observeEvent(input$run_sna, {
-  #  print('ADD CALL TO TWITTER CHARTS HERE')  
-  #})  
-  
+
   ##############################################################
   #  TWITTER SNA FUNCTIONS
   ##############################################################
   
   data <- function(){
-    print('ADD CALL TO TWITTER CHARTS HERE') 
     all_tweets = read.csv( "./data/tweets.csv", stringsAsFactors = FALSE)
     
     re_tweets =  all_tweets[,c("retweeted_status.user.id", "user.id", "text")]
@@ -133,6 +129,80 @@ shinyServer(function(input, output, session) {
   #-------------------------------------------------------------
   #  END TWITTER SNA FUNCTIONS
   #-------------------------------------------------------------
+  
+  ##############################################################
+  #  TWITTER WORDCLOUD FUNCTIONS
+  ##############################################################
+  
+  business<-read.csv("data/tweets.csv")
+  business1=business[,c("id","text","retweeted")]
+  
+  docs <- Corpus(VectorSource(business1$text))
+  #inspect(docs)
+  toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+  docs <- tm_map(docs, toSpace, "/")
+  docs <- tm_map(docs, toSpace, "@")
+  docs <- tm_map(docs, toSpace, "\\|")
+  docs <- tm_map(docs, toSpace, "'")
+  docs <- tm_map(docs, toSpace, "ðŸ˜")
+  docs <- VCorpus(VectorSource(readLines("data/tweets.csv", encoding = "UTF-8")))
+  
+  # Remove numbers
+  docs <- tm_map(docs, removeNumbers)
+  
+  # Remove english common stopwords
+  docs <- tm_map(docs, removeWords, stopwords("english"))
+  
+  # Remove your own stop word
+  # specify your stopwords as a character vector
+  
+  docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+  
+  # specify your stopwords as a character vector
+  docs <- tm_map(docs, removeWords, c("oct","relnofollowuetwitter","the","day")) 
+  
+  # Remove punctuations
+  docs <- tm_map(docs, removePunctuation)
+  
+  # Eliminate extra white spaces
+  docs <- tm_map(docs, stripWhitespace)
+  
+  # Text stemming
+  #docs <- tm_map(docs, stemDocument)
+  
+  dtm <- TermDocumentMatrix(docs)
+  m <- as.matrix(dtm)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  d <- data.frame(word = names(v),freq=v)
+  #head(d, 14)
+  
+  set.seed(1234)
+  
+  output$word_cloud <- renderPlot({
+    wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+              max.words=200, random.order=FALSE, rot.per=0.35,
+              colors=brewer.pal(8, "Dark2"))    
+  })
+  
+  findFreqTerms(dtm, lowfreq = 4)
+  findAssocs(dtm, terms = "trump", corlimit = 0.3)
+  #head(d, 10)
+  
+  
+  output$word_freq <- renderPlot({
+    
+    # Render a barplot
+    
+    barplot(d[1:10,]$freq, las = 2, names.arg = d[1:10,]$word,
+            col ="lightblue", main ="Most frequent words",
+            ylab = "Word frequencies"
+    )
+  })
+  
+  
+  #-------------------------------------------------------------
+  #  END TWITTER WORDCLOUD FUNCTIONS
+  #-------------------------------------------------------------  
   
   #####################
   ## correlates plot ##
