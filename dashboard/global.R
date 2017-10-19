@@ -19,6 +19,13 @@ if(!require(dplyr))        {install.packages('dplyr', dependencies = TRUE);requi
 
 #Added packages
 if(!require(DT))        {install.packages('DT', dependencies = TRUE);require(DT)}
+if(!require(googleVis))        {install.packages('googleVis', dependencies = TRUE);require(googleVis)}
+
+##################
+## read in data ##
+##################
+
+qog_dat <- read.csv("data/qog_reduced.csv")
 
 ################################################################################################
 #  Load Modules
@@ -88,19 +95,27 @@ tab_0_ui <- function() {
 #-------------------------
 
 tab_1_ui <- function() {
-  
+
   tabPanel(
-    'Factor Variables',
+    'Correlates of Criminal Behaviour',
     fluidPage(
       titlePanel("Factor Variables"),
       p("Choose a PDF file to be processed. After uploading, this page will automatically convert the PDF file into image, text and xml files."),
       p("Select the page number to view a different page of the PDF, converted output can be seen in the respective tabs below."),
       p("Note: This might take a few minutes to process and return results"),
-      p(actionButton(inputId = "run_factor_analysis", label = "Run"))
-      
+      fluidRow(
+        box(width = 12,
+            tagList(
+              titlePanel("Retweets"),
+              htmlOutput("gvis"),
+              p()#,
+            )
+        )
+      ) # end: fluidRow
+
     )
   )
-  
+
 } # end: tab_1_ui()
 
 #-------------------------

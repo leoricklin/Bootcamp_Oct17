@@ -5,7 +5,7 @@ sidebar <- shinydashboard::dashboardSidebar(
   sidebarMenu(
     id = 'navpage',
     menuItem("Welcome", tabName = "tab_0", icon = icon("info-circle")),
-    menuItem("Factor Variables", tabName = "tab_1", icon = icon("area-chart")),
+    menuItem("Correlates of Criminal Behaviour", tabName = "tab_1", icon = icon("area-chart")),
     menuItem("Twitter Social Network Analysis", tabName = "tab_2", icon = icon("twitter"))
   ),
 
