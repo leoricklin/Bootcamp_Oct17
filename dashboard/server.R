@@ -133,6 +133,25 @@ shinyServer(function(input, output, session) {
   #  END TWITTER SNA FUNCTIONS
   #-------------------------------------------------------------
   
+  #####################
+  ## correlates plot ##
+  #####################
   
+  output$gvis <- renderGvis({
+    # gvisGeoChart(myData,
+    #              locationvar="state", colorvar="demVote",
+    #              options=list(region="US", displayMode="regions", 
+    #                           resolution="provinces",
+    #                           width=500, height=400,
+    #                           colorAxis="{colors:['#FFFFFF', '#0000FF']}"
+    #              ))
+    gvisMotionChart(qog_dat, 
+                    idvar="country", 
+                    colorvar = "continent",
+                    timevar="year",
+                    sizevar = "pop_size",
+                    xvar = "infant_mortality",
+                    yvar = "homicides")
+  })
   
 })
