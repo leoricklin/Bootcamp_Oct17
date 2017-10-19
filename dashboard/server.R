@@ -51,7 +51,7 @@ shinyServer(function(input, output, session) {
     
     persons <- rbind(per_a, per_b)
     #edge_names<- persons[duplicated(persons)==FALSE, ]
-    edge_names <- unique(edge_names)
+    edge_names <- unique(persons)
     
     g <-graph.data.frame(final_db, directed = TRUE,
                          vertices= data.frame(edge_names)
@@ -101,7 +101,7 @@ shinyServer(function(input, output, session) {
     
     persons <- rbind(per_a, per_b)
     #edge_names<- persons[duplicated(persons)==FALSE, ]
-    edge_names <- unique(edge_names)
+    edge_names <- unique(persons)
     edge_names <- sapply(edge_names, FUN=as.character)
     
     final_game_db  <- data.table::CJ(edge_names, edge_names)
