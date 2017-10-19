@@ -1,7 +1,10 @@
 # Front page module
 
 # UI function
-tab_1_ui <- function() {
+tab_1_ui <- function(id) {
+  
+  # Basically not needed. Just kept here to preserve commonality across files.
+  ns <- NS(id)    
   
   tabPanel(
     'Factor Variables',
@@ -18,9 +21,9 @@ tab_1_ui <- function() {
 } # end: tab_1_ui()
 
 # Server function
-tab_1_server <- function(input, output, session) {
+tab_1_server <- function(input, output, session, test) {
 
-  observeEvent(input$run_factor_analysis, {
+  observeEvent(test, {
     print('ADD CALL TO FACTOR ANALYSIS HERE')  
   })  
 

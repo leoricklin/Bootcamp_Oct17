@@ -4,9 +4,9 @@ theme_set(theme_bw())
 sidebar <- shinydashboard::dashboardSidebar(
   sidebarMenu(
     id = 'navpage',
-    menuItem("Welcome", tabName = "welcome_page", icon = icon("info-circle")),
-    menuItem("Factor Variables", tabName = "factor_variables", icon = icon("area-chart")),
-    menuItem("Twitter Social Network Analysis", tabName = "social_network_analysis", icon = icon("twitter"))
+    menuItem("Welcome", tabName = "tab_0", icon = icon("info-circle")),
+    menuItem("Factor Variables", tabName = "tab_1", icon = icon("area-chart")),
+    menuItem("Twitter Social Network Analysis", tabName = "tab_2", icon = icon("twitter"))
   ),
 
   # Logo in sidebar menu
@@ -46,9 +46,9 @@ body <- shinydashboard::dashboardBody(
 
   # Write the UI reference of the modules
   tabItems(
-    tabItem(tabName = "welcome_page", tab_0_ui()),
-    tabItem(tabName = "factor_variables", tab_1_ui()),
-    tabItem(tabName = "social_network_analysis", tab_2_ui())
+    tabItem(tabName = "tab_0", tab_0_ui()),
+    tabItem(tabName = "tab_1", tab_1_ui()),
+    tabItem(tabName = "tab_2", tab_2_ui())
   )
 )
 

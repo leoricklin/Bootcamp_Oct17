@@ -4,6 +4,9 @@
 
 # UI function
 tab_2_ui <- function(id) {
+  
+  # Basically not needed. Just kept here to preserve commonality across files.
+  ns <- NS(id)    
 
   tabPanel(
     'Twitter Social Nets',

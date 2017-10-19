@@ -1,7 +1,10 @@
 # Front page module
 
 # UI function
-tab_0_ui <- function() {
+tab_0_ui <- function(id) {
+  
+  # Basically not needed. Just kept here to preserve commonality across files.
+  ns <- NS(id)  
   
   # Create list of partner logos
   logos <- list.files("www/external_logos", full.names = TRUE)
