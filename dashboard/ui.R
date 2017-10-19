@@ -1,13 +1,12 @@
-############################## CREATE THE SIDEBAR ##############################
-sidebar <- dashboardSidebar(
+# set black and white plot theme
+theme_set(theme_bw())
+
+sidebar <- shinydashboard::dashboardSidebar(
   sidebarMenu(
-    menuItem("Summary", tabName = "Tab0", icon = icon("info-circle")),
-             #collapsible= 
-              # menuSubItem("Default1", tabName = "not_used1", icon=icon('filter')),
-              #menuSubItem("Executive Summary", tabName = "Tab0_Sum", icon=icon('filter')),
-              #menuSubItem("Datasets", tabName = "datasets", icon=icon('filter'))),
-    menuItem("Factor Variables",      tabName = "Tab1", icon = icon("certificate")),
-    menuItem("Twitter Social Nets",      tabName = "Tab2", icon = icon("globe"))
+    id = 'navpage',
+    menuItem("Welcome", tabName = "welcome_page", icon = icon("info-circle")),
+    menuItem("Factor Variables", tabName = "factor_variables", icon = icon("area-chart")),
+    menuItem("Twitter Social Network Analysis", tabName = "social_network_analysis", icon = icon("twitter"))
   ),
 
   # Logo in sidebar menu
@@ -16,27 +15,45 @@ sidebar <- dashboardSidebar(
   )
 )
 
-############################### CREATE THE BODY ################################
-body <- dashboardBody(
+body <- shinydashboard::dashboardBody(
   tags$head(
+    tags$style(type="text/css", "
+             #loadmessage {
+               position: fixed;
+               top: 0px;
+               left: 0px;
+               width: 100%;
+               padding: 5px 0px 5px 0px;
+               text-align: center;
+               font-weight: bold;
+               font-size: 100%;
+               color: #000000;
+               background-color: #CCFF66;
+               z-index: 105;
+             }
+    "),
     tags$link(rel = "stylesheet", type = "text/css", href = "AdminLTE.min.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "_all-skins.min.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "skin-yellow.min.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "skin-yellow.min.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+    tags$link(rel = "shortcut icon", href = "https://www.thinkbiganalytics.com/wp-content/uploads/2016/09/14TDPRD223_Think_Big_Logo_F-150x147.png"),
+
+    # tags$link(rel = "stylesheet", type = "text/css", href = "stylesleaflet.css"),
+    # tags$link(rel = "stylesheet", type = "text/css", href = "gomap.js")
+    includeCSS("stylesleaflet.css"),
+    includeScript("gomap.js")
   ),
 
   # Write the UI reference of the modules
   tabItems(
-    tabItem(tabName = "Tab0", tab_0_ui("tab_0")),
-    tabItem(tabName = "Tab1", tab_1_ui("tab_1")),
-    tabItem(tabName = "Tab2", tab_2_ui("tab_2")),
-    tabItem(tabName = "Tab3", tab_3_ui("tab_3")),
-    tabItem(tabName = "Tab4", tab_4_ui("tab_4")),
-    tabItem(tabName = "Tab5", tab_5_ui("tab_5"))
+    tabItem(tabName = "welcome_page", tab_0_ui()),
+    tabItem(tabName = "factor_variables", tab_1_ui()),
+    tabItem(tabName = "social_network_analysis", tab_2_ui())
   )
 )
 
-#################### PUT THEM TOGETHER INTO A DASHBOARDPAGE ####################
-dashboardPage(skin = "yellow",
+shinydashboard::dashboardPage(
+  skin = "yellow",
   dashboardHeader(title = "PC Labs Demo"),
   sidebar,
   body
