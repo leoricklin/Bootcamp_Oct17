@@ -1,16 +1,12 @@
 # server code for R Shiny Dashboard Engine demo
 shinyServer(function(input, output, session) {
   
-  #observeEvent(input$run_sna, {
-  #  print('ADD CALL TO TWITTER CHARTS HERE')  
-  #})  
-  
+
   ##############################################################
   #  TWITTER SNA FUNCTIONS
   ##############################################################
   
   data <- function(){
-    print('ADD CALL TO TWITTER CHARTS HERE') 
     all_tweets = read.csv( "./data/tweets.csv", stringsAsFactors = FALSE)
     
     re_tweets =  all_tweets[,c("retweeted_status.user.id", "user.id", "text")]
@@ -20,22 +16,16 @@ shinyServer(function(input, output, session) {
     re_tweets$user <- sapply(re_tweets$user, FUN=as.character)
     re_tweets$origin <- sapply(re_tweets$origin, FUN=as.character)
     
-    #re_tweets$user <- as.character(re_tweets$user)
-    #re_tweets$origin <- as.character(re_tweets$origin)
-    
     return(list("all_tweets" = all_tweets,
                 "re_tweets" = re_tweets))
     
-    #assign("all_tweets", all_tweets, envir = .GlobalEnv)
-    
-    #assign("re_tweets", re_tweets, envir = .GlobalEnv)
   }
   
   
-  output$network_game <- renderVisNetwork({
+  output$sna_retweet <- renderVisNetwork({
     
     re_tweets<-data()$re_tweet
-    print("Net")
+    print("Graph Net")
     
     final_db <- re_tweets %>%
       group_by(user, origin) %>%
@@ -48,10 +38,18 @@ shinyServer(function(input, output, session) {
     
     per_b <-final_db[,"to"]
     names(per_b) <- c("name")
+    print("perbgrph")
+    print(dim(per_b))
     
     persons <- rbind(per_a, per_b)
-    #edge_names<- persons[duplicated(persons)==FALSE, ]
+    
+    persons <- persons[!apply(is.na(persons) | persons == "", 1, all),]
+    
+    edge_names<- persons[duplicated(persons)==FALSE, ]
     edge_names <- unique(persons)
+    print("edges gaphs")
+    print(dim(edge_names))
+    
     
     g <-graph.data.frame(final_db, directed = TRUE,
                          vertices= data.frame(edge_names)
@@ -66,7 +64,6 @@ shinyServer(function(input, output, session) {
     E(g)$color <- "blue4"
     #
     visIgraph(g) %>%   visOptions(highlightNearest = TRUE,  selectedBy = "position")
-    #
     
     
   })
@@ -74,17 +71,9 @@ shinyServer(function(input, output, session) {
   
   output$sna_ret_metrics <- renderDataTable({
     
-    # all_players <- unique(c(game_db_metrics[,'PLAYER_NAME_LAST_FIRST'],
-    #                         game_db_metrics[,'PASS_TO']))
-    # db_players<- data.frame(data.table::CJ(x=all_players,y=all_players))
-    # 
-    # names(db_players)<- c("PLAYER_NAME_LAST_FIRST", "PASS_TO")
-    # final_game_db <- merge(db_players,game_db_metrics, by= c("PLAYER_NAME_LAST_FIRST", "PASS_TO"),
-    #                        all.x= TRUE )
-    # final_game_db[is.na(final_game_db)] <- 0
     
     re_tweets<-data()$re_tweet
-    
+    print(dim(re_tweets))
     print("Net")
     
     final_db <- re_tweets %>%
@@ -98,10 +87,12 @@ shinyServer(function(input, output, session) {
     
     per_b <-final_db[,"to"]
     names(per_b) <- c("name")
-    
     persons <- rbind(per_a, per_b)
-    #edge_names<- persons[duplicated(persons)==FALSE, ]
+    
+    edge_names<- persons[duplicated(persons)==FALSE, ]
     edge_names <- unique(persons)
+    
+    
     edge_names <- sapply(edge_names, FUN=as.character)
     
     final_game_db  <- data.table::CJ(edge_names, edge_names)
@@ -109,10 +100,13 @@ shinyServer(function(input, output, session) {
     names(final_game_db) <- c("to", "from")
     
     final_game_db <-  merge(final_game_db, final_db,by= c("to", "from"), all.x=TRUE )
-    final_game_db[is.na(final_game_db)] <- 0
+    final_game_db[is.na(final_game_db),] <- 0
     
-    matrix <- as.matrix(xtabs(weight~ from + to, final_game_db))
+    final_game_db$to <- as.character(final_game_db$to)
+    final_game_db$from <- as.character(final_game_db$from)
     
+    matrix <- as.matrix(stats::xtabs(weight~ from+ to, final_game_db, na.action = na.omit))
+
     g<-graph.adjacency(matrix)
     # Degree Centrality 
     cent_in<- centralization.degree(g, mode ="in")$res
@@ -124,32 +118,96 @@ shinyServer(function(input, output, session) {
     df_f$degree_out<- cent_out
     df_f$clos<- round(clos,2)
     df_f$bet<- round(bet,2)
-    colnames(df_f)[1] <- "User"
-    colnames(df_f)[2] <- "Degree In"
-    colnames(df_f)[3] <- "Degree Out"
-    colnames(df_f)[4] <- "Closeness"
-    colnames(df_f)[5] <- "Betweenness"
+    colnames(df_f)[1] <- c("User","Degree In", "Degree Out", "Closeness", "Betweenness")
     DT::datatable(df_f,options = list(paging = FALSE, searching= FALSE, autoWidth= TRUE))
     
     
   })
   
+    
   #-------------------------------------------------------------
   #  END TWITTER SNA FUNCTIONS
   #-------------------------------------------------------------
+  
+  ##############################################################
+  #  TWITTER WORDCLOUD FUNCTIONS
+  ##############################################################
+  
+  business<-read.csv("data/tweets.csv")
+  business1=business[,c("id","text","retweeted")]
+  
+  docs <- Corpus(VectorSource(business1$text))
+  #inspect(docs)
+  toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+  docs <- tm_map(docs, toSpace, "/")
+  docs <- tm_map(docs, toSpace, "@")
+  docs <- tm_map(docs, toSpace, "\\|")
+  docs <- tm_map(docs, toSpace, "'")
+  docs <- tm_map(docs, toSpace, "ðŸ˜")
+  docs <- VCorpus(VectorSource(readLines("data/tweets.csv", encoding = "UTF-8")))
+  
+  # Remove numbers
+  docs <- tm_map(docs, removeNumbers)
+  
+  # Remove english common stopwords
+  docs <- tm_map(docs, removeWords, stopwords("english"))
+  
+  # Remove your own stop word
+  # specify your stopwords as a character vector
+  
+  docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+  
+  # specify your stopwords as a character vector
+  docs <- tm_map(docs, removeWords, c("oct","relnofollowuetwitter","the","day")) 
+  
+  # Remove punctuations
+  docs <- tm_map(docs, removePunctuation)
+  
+  # Eliminate extra white spaces
+  docs <- tm_map(docs, stripWhitespace)
+  
+  # Text stemming
+  #docs <- tm_map(docs, stemDocument)
+  
+  dtm <- TermDocumentMatrix(docs)
+  m <- as.matrix(dtm)
+  v <- sort(rowSums(m),decreasing=TRUE)
+  d <- data.frame(word = names(v),freq=v)
+  #head(d, 14)
+  
+  set.seed(1234)
+  
+  output$word_cloud <- renderPlot({
+    wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+              max.words=200, random.order=FALSE, rot.per=0.35,
+              colors=brewer.pal(8, "Dark2"))    
+  })
+  
+  findFreqTerms(dtm, lowfreq = 4)
+  findAssocs(dtm, terms = "trump", corlimit = 0.3)
+  #head(d, 10)
+  
+  
+  output$word_freq <- renderPlot({
+    
+    # Render a barplot
+    
+    barplot(d[1:10,]$freq, las = 2, names.arg = d[1:10,]$word,
+            col ="lightblue", main ="Most frequent words",
+            ylab = "Word frequencies"
+    )
+  })
+  
+  
+  #-------------------------------------------------------------
+  #  END TWITTER WORDCLOUD FUNCTIONS
+  #-------------------------------------------------------------  
   
   #####################
   ## correlates plot ##
   #####################
   
   output$gvis <- renderGvis({
-    # gvisGeoChart(myData,
-    #              locationvar="state", colorvar="demVote",
-    #              options=list(region="US", displayMode="regions", 
-    #                           resolution="provinces",
-    #                           width=500, height=400,
-    #                           colorAxis="{colors:['#FFFFFF', '#0000FF']}"
-    #              ))
     gvisMotionChart(qog_dat, 
                     idvar="country", 
                     colorvar = "continent",

@@ -16,6 +16,8 @@ if(!require(ggplot2))        {install.packages('ggplot2', dependencies = TRUE);r
 if(!require(data.table))        {install.packages('data.table', dependencies = TRUE);require(data.table)}
 if(!require(igraph))        {install.packages('igraph', dependencies = TRUE);require(igraph)}
 if(!require(dplyr))        {install.packages('dplyr', dependencies = TRUE);require(dplyr)}
+if(!require(SnowballC))        {install.packages('SnowballC', dependencies = TRUE);require(SnowballC)}
+if(!require(wordcloud))        {install.packages('wordcloud', dependencies = TRUE);require(wordcloud)}
 
 #Added packages
 if(!require(DT))        {install.packages('DT', dependencies = TRUE);require(DT)}
@@ -105,6 +107,10 @@ tab_1_ui <- function() {
       p("2. World bank data on global homicide rates since 1945"),
       p(),
       p("The data was passed through an extensive cleaning and processing pieline to identify the highest quality variables."),
+      conditionalPanel(
+        condition="($('html').hasClass('shiny-busy'))",
+        img(src="loading.gif")
+      ),      
       fluidRow(
         box(width = 12,
             tagList(
@@ -126,31 +132,48 @@ tab_1_ui <- function() {
 
 tab_2_ui <- function() {
   
-  tabPanel(
-    'Twitter Social Nets',
-    fluidPage(
-      titlePanel("Twitter Social Nets"),
-      p("Choose a PDF file to be processed. After uploading, this page will automatically convert the PDF file into image, text and xml files."),
-      p("Select the page number to view a different page of the PDF, converted output can be seen in the respective tabs below."),
-      p("Note: This might take a few minutes to process and return results"),  
-      p(actionButton(inputId = "run_sna", label = "Run")),
-      fluidRow(
-        box(width = 12,
-            tagList(
-              titlePanel("Retweets"),
-              visNetworkOutput("sna_retweet"),
-              p()#,
-              #actionButton(ns("recalc"), "New points")
+  fluidPage(
+    titlePanel("Twitter Social Network Analysis"),
+    p("The two tabs below will show the following:"),
+    p("1. A graph plot of how users are connected based on the retweets"),
+    p("2. A wordcloud of the tweets to see the common words / topics being discussed."),    
+    conditionalPanel(
+      condition="($('html').hasClass('shiny-busy'))",
+      img(src="loading.gif")
+    ),
+    tabBox(title='', width=NULL, side = 'left', selected = 'Twitter Social Nets',
+        tabPanel(
+          'Twitter Social Nets',
+            fluidRow(
+              box(width = 12,
+                  tagList(
+                    titlePanel("Retweets"),
+                    visNetworkOutput("sna_retweet"),
+                    p()#,
+                  ),
+                  box( width = 12, 
+                       tagList(
+                         titlePanel("Retweet Metrics"),
+                         DT::dataTableOutput("sna_ret_metrics")
+                       )
+                  )
+              )
+            ) # end: fluidRow
+        ), # end: tabPanel
+        tabPanel(
+          'Twitter Word Cloud',
+          fluidRow(
+            box(width = 12,
+                titlePanel("Word Cloud"),
+                plotOutput('word_cloud')
             ),
-            box( width = 12, 
-                 tagList(
-                   titlePanel("Retweet Metrics"),
-                   DT::dataTableOutput("sna_ret_metrics")
-                 )
+            box(width = 12, 
+                titlePanel("Word Frequency"),
+                plotOutput('word_freq')
             )
-        )
-      ) # end: fluidRow
-    ) # end: fluidPage
+          ) # end: fluidRow
+        ) # end: tabPanel        
+    ) # end: tabBox
   )
   
 } # end: tab_2_ui()
