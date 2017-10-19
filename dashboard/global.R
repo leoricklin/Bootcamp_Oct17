@@ -99,14 +99,16 @@ tab_1_ui <- function() {
   tabPanel(
     'Correlates of Criminal Behaviour',
     fluidPage(
-      titlePanel("Factor Variables"),
-      p("Choose a PDF file to be processed. After uploading, this page will automatically convert the PDF file into image, text and xml files."),
-      p("Select the page number to view a different page of the PDF, converted output can be seen in the respective tabs below."),
-      p("Note: This might take a few minutes to process and return results"),
+      titlePanel("Identifying potential influences on criminal behaviour internationally"),
+      p("We identified international time series data from the following sources:"),
+      p("1.	Quality of Governance standard data (2000 variables from 200 data sources)"),
+      p("2. World bank data on global homicide rates since 1945"),
+      p(),
+      p("The data was passed through an extensive cleaning and processing pieline to identify the highest quality variables."),
       fluidRow(
         box(width = 12,
             tagList(
-              titlePanel("Retweets"),
+              titlePanel("Comparisions of countries over time"),
               htmlOutput("gvis"),
               p()#,
             )
