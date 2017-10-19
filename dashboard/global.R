@@ -7,9 +7,13 @@ print(getwd())
 # ---------------------------------------------
 if(!require(shiny))          {install.packages('shiny', dependencies = TRUE);require(shiny)}
 if(!require(shinydashboard)) {install.packages('shinydashboard', dependencies = TRUE);require(shinydashboard)}
-if(!require(reshape2))       {install.packages('reshape2', dependencies = TRUE);require(reshape2)}
-if(!require(ggplot2))        {install.packages('ggplot2', dependencies = TRUE);require(ggplot2)}
+if(!require(leaflet))       {install.packages('leaflet', dependencies = TRUE);require(leaflet)}
+if(!require(stringr))        {install.packages('stringr', dependencies = TRUE);require(stringr)}
+if(!require(dygraphs))        {install.packages('dygraphs', dependencies = TRUE);require(dygraphs)}
+if(!require(visNetwork))        {install.packages('visNetwork', dependencies = TRUE);require(visNetwork)}
 
+#Added packages
+if(!require(DT))        {install.packages('DT', dependencies = TRUE);require(DT)}
 
 # ---------------------------------------------
 #  Load Modules
