@@ -85,7 +85,7 @@ shinyServer(function(input, output, session) {
       summarize(n())
     
     names(final_db) <- c("from", "to", "weight")
-
+    
     per_a <-final_db[,"from"]
     names(per_a) <- c("name")
     
@@ -95,7 +95,7 @@ shinyServer(function(input, output, session) {
     
     edge_names<- persons[duplicated(persons)==FALSE, ]
     edge_names <- unique(persons)
-  
+    
     
     edge_names <- sapply(edge_names, FUN=as.character)
     
@@ -105,12 +105,12 @@ shinyServer(function(input, output, session) {
     
     final_game_db <-  merge(final_game_db, final_db,by= c("to", "from"), all.x=TRUE )
     final_game_db[is.na(final_game_db),] <- 0
-  
+    
     final_game_db$to <- as.character(final_game_db$to)
     final_game_db$from <- as.character(final_game_db$from)
-
+    
     matrix <- as.matrix(stats::xtabs(weight~ from+ to, final_game_db, na.action = na.omit))
-
+    
     
     g<-graph.adjacency(matrix)
     # Degree Centrality 
@@ -129,6 +129,7 @@ shinyServer(function(input, output, session) {
     
   })
   
+    
   #-------------------------------------------------------------
   #  END TWITTER SNA FUNCTIONS
   #-------------------------------------------------------------
