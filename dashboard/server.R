@@ -111,8 +111,7 @@ shinyServer(function(input, output, session) {
     final_game_db <-  merge(final_game_db, final_db,by= c("to", "from"), all.x=TRUE )
     final_game_db[is.na(final_game_db)] <- 0
     
-    
-    matrix =  as.matrix(xtabs(weight~ from+ to, final_game_db))
+    matrix <- as.matrix(xtabs(weight~ from + to, final_game_db))
     
     g<-graph.adjacency(matrix)
     # Degree Centrality 
