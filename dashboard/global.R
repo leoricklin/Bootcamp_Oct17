@@ -18,6 +18,7 @@ if(!require(igraph))        {install.packages('igraph', dependencies = TRUE);req
 if(!require(dplyr))        {install.packages('dplyr', dependencies = TRUE);require(dplyr)}
 if(!require(SnowballC))        {install.packages('SnowballC', dependencies = TRUE);require(SnowballC)}
 if(!require(wordcloud))        {install.packages('wordcloud', dependencies = TRUE);require(wordcloud)}
+if(!require(tm))        {install.packages('tm', dependencies = TRUE);require(tm)}
 
 #Added packages
 if(!require(DT))        {install.packages('DT', dependencies = TRUE);require(DT)}
