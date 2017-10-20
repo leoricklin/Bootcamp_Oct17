@@ -217,4 +217,9 @@ shinyServer(function(input, output, session) {
                     yvar = "homicides")
   })
   
+  
+  
+  
+  output$corr_table <- renderTable(qog_corr)
+  output$pca_table <- renderTable(qog_pca)
 })

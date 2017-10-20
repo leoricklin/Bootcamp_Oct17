@@ -11,7 +11,7 @@ sidebar <- shinydashboard::dashboardSidebar(
 
   # Logo in sidebar menu
   div(style = "position: fixed; bottom: 35px; left: 35px;",
-      img(src = 'tb_images/tb_logo.png', width = 197)
+      img(src = 'tb_images/TBA_newlogo.jpg', width = 197)
   )
 )
 

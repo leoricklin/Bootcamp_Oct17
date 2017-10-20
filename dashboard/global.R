@@ -29,6 +29,8 @@ if(!require(googleVis))        {install.packages('googleVis', dependencies = TRU
 ##################
 
 qog_dat <- read.csv("data/qog_reduced.csv")
+qog_pca <- read.csv("data/pca_df.csv")
+qog_corr <- read.csv("data/corrs_df.csv")
 
 ################################################################################################
 #  Load Modules
@@ -120,11 +122,22 @@ tab_1_ui <- function() {
               p()#,
             )
         )
-      ) # end: fluidRow
-
+      ), # end: fluidRow
+      p(),
+      h3("Correlations of homicide rate with covariates:"),
+      fluidRow(
+        column(12,
+               tableOutput('corr_table')
+        )
+      ),
+      p(),
+      h3("Principal Components Analysis:"),
+      fluidRow(
+        column(12, tableOutput('pca_table')
+        )
+      )
     )
-  )
-
+  ) 
 } # end: tab_1_ui()
 
 #-------------------------
